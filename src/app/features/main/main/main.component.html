@@ -1,0 +1,45 @@
+<section>
+  <div class="container-xxl px-0 mt-5">
+    <div class="arrows position-relative bg-transparent">
+      <div class="main-images">
+        <div class="card border-0">
+          <img src="{{mainImageAddress}}/main-1.png" class="card-img d-none d-md-block" alt="main-tea">
+          <img src="{{mainImageAddress}}/tea-1.png" class="card-img d-block d-md-none" alt="tea-1">
+          <div class="card-img-overlay row d-none d-md-flex align-items-end w-75 h-75 m-5">
+            <h5 class="card-title fw-bold brand">NEWBY<span class="brand-place">LONDON</span></h5>
+            <p class="card-text fs-5">Ароматные сорта чая</p>
+            <a routerLink="products" class="btn btn-primary m-3">подробнее</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container-xxl">
+    <p class="custom-h2">Ответы на часто задаваемые вопросы</p>
+    <div class="row justify-content-center mb-5">
+      <div class="col-xxl-8 col-xl-9 col-lg-11">
+        <accordion></accordion>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #popup>
+  <div class="modal bg-opacity-10 bg-black d-block">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                  (click)="modalClose()"></button>
+        </div>
+        <div class="modal-body d-block text-center row">
+          <h5>Посмотрите наши чайные коллекции</h5>
+          <a routerLink="/products" type="button" class="btn btn-primary m-3" (click)="modalClose()">Смотреть</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,135 @@
+<section class="order-section">
+  <div class="container d-flex justify-content-center">
+
+    <form class="row mb-5 mt-5 needs-validation" novalidate [formGroup]="checkoutForms"
+          id="submitForm"
+          (ngSubmit)="createOrder()"
+          *ngIf="!successResponse">
+      <p class="custom-h2">Сделать заказ</p>
+
+      <div class="mb-3 col-sm-6 col-xs-12">
+        <label for="validationZip" class="form-label">Товар</label>
+        <input type="text" class="form-control" placeholder="" disabled [value]="product.title">
+      </div>
+      <div class="mb-3 col-sm-6 col-xs-12">
+        <label for="validationZip" class="form-label">Комментарий к заказу</label>
+        <input type="text" class="form-control" formControlName="comment">
+      </div>
+      <div class="mb-3 col-lg-4 col-md-6 col-xs-12">
+        <label for="validationName" class="form-label">Имя</label>
+        <input type="text" class="form-control" id="validationName" formControlName="name"
+               [class]="(isInvalid('name') || isRequiredError('name'))
+                 && isDirty('name') ? 'is-invalid'
+                 : !isInvalid('name') ? 'is-valid' : ''">
+        <div class="valid-feedback">
+          Имя заполнено!
+        </div>
+        <div class="invalid-feedback" *ngIf="isRequiredError('name')">
+          Пожалуйста, заполните ваше имя.
+        </div>
+        <div class="invalid-feedback" *ngIf="isPatternError('name')">
+          Имя должно состоять только из русских букв.
+        </div>
+      </div>
+
+      <div class="mb-3 col-lg-4 col-md-6 col-xs-12">
+        <label for="validationLastName" class="form-label">Фамилия</label>
+        <input type="text" class="form-control" id="validationLastName" formControlName="last_name"
+               [class]="(isInvalid('last_name') || isRequiredError('last_name'))
+                 && isDirty('last_name') ? 'is-invalid'
+                 : !isInvalid('last_name') ? 'is-valid' : ''">
+        <div class="valid-feedback">
+          Фамилия заполнена!
+        </div>
+        <div class="invalid-feedback" *ngIf="isRequiredError('last_name')">
+          Пожалуйста, заполните вашу фамилию.
+        </div>
+        <div class="invalid-feedback" *ngIf="isPatternError('last_name')">
+          Фамилия должна состоять только из русских букв.
+        </div>
+      </div>
+
+      <div class="mb-3 col-lg-4 col-xs-12">
+        <label for="validationPhone" class="form-label">Телефон</label>
+        <input type="text" class="form-control has-validation" id="validationPhone" formControlName="phone"
+               [class]="(isInvalid('phone') || isRequiredError('phone'))
+                 && isDirty('phone') ? 'is-invalid'
+                 : !isInvalid('phone') ? 'is-valid' : ''">
+        <div class="valid-feedback">
+          Телефон заполнен!
+        </div>
+        <div class="invalid-feedback" *ngIf="isRequiredError('phone')">
+          Пожалуйста, заполните телефон.
+        </div>
+        <div class="invalid-feedback" *ngIf="isPatternError('phone')">
+          Введите телефон в формате: +79999999999, 79999999999, 89999999999
+        </div>
+      </div>
+
+      <div class="mb-3 col-sm-6 col-xs-12">
+        <label for="validationCountry" class="form-label">Страна</label>
+        <select class="form-control" id="validationCountry" formControlName="country"
+                [class]="(isInvalid('country') || isRequiredError('country'))
+                 && isDirty('country') ? 'is-invalid'
+                 : !isInvalid('country') ? 'is-valid' : ''">
+          <option selected disabled>Выбрать...</option>
+          <option>Беларусь</option>
+          <option>Россия</option>
+          <option>...</option>
+        </select>
+        <div class="valid-feedback">
+          Страна заполнена!
+        </div>
+        <div class="invalid-feedback">
+          Пожалуйста, заполните страну.
+        </div>
+      </div>
+
+      <div class="mb-3 col-sm-6 col-xs-12">
+        <label for="validationZip" class="form-label">Индекс</label>
+        <input type="text" class="form-control" id="validationZip" formControlName="zip"
+               [class]="(isInvalid('zip') || isRequiredError('zip'))
+                 && isDirty('zip') ? 'is-invalid'
+                 : !isInvalid('zip') ? 'is-valid' : ''">
+        <div class="valid-feedback">
+          Индекс заполнен!
+        </div>
+        <div class="invalid-feedback" *ngIf="isRequiredError('zip')">
+          Пожалуйста, заполните индекс.
+        </div>
+        <div class="invalid-feedback" *ngIf="isPatternError('zip')">
+          Индекс должен содержать 6 цифр.
+        </div>
+      </div>
+
+      <div class="mb-3 col-12">
+        <label for="validationAddress" class="form-label">Адрес</label>
+        <input type="text" class="form-control" id="validationAddress" formControlName="address"
+               [class]="(isInvalid('address') || isRequiredError('address'))
+                 && isDirty('address') ? 'is-invalid'
+                 : !isInvalid('address') ? 'is-valid' : ''">
+        <div class="valid-feedback">
+          Адрес заполнен!
+        </div>
+        <div class="invalid-feedback" *ngIf="isRequiredError('address')">
+          Пожалуйста, заполните адрес.
+        </div>
+        <div class="invalid-feedback" *ngIf="isPatternError('address')">
+          Адрес может состоять из русских букв, цифр, пробелов, знаков: "-", "/" и содержать 10-20 символов.
+        </div>
+      </div>
+
+      <div class="col-auto">
+        <button class="btn btn-primary mt-4 mb-3 hvr-shadow" id="create-order"
+        [disabled]="checkoutForms.invalid || checkoutForms.disabled">Отправить
+        </button>
+        <div class="text-danger fw-bold" *ngIf="errorResponse">Произошла ошибка. Попробуйте еще раз</div>
+      </div>
+    </form>
+    <div class="modal-body mx-4 d-block" *ngIf="successResponse">
+      <p class="custom-h2">Спасибо за заказ!<br>
+        Мы свяжемся с вами в ближайшее время!</p>
+    </div>
+
+  </div>
+</section>
